@@ -1,0 +1,74 @@
+              
+\documentclass[12pt]{article}
+ \usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts}
+ 
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+ 
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+%If you want to title your bold things something different just make another thing exactly like this but replace "problem" with the name of the thing you want, like theorem or lemma or whatever
+ 
+\begin{document}
+ 
+%\renewcommand{\qedsymbol}{\filledbox}
+%Good resources for looking up how to do stuff:
+%Binary operators: http://www.access2science.com/latex/Binary.html
+%General help: http://en.wikibooks.org/wiki/LaTeX/Mathematics
+%Or just google stuff
+ 
+\title{Homework 1}
+\author{Selma Wanna}
+\maketitle
+ 
+\begin{problem}{1}
+Describe one instance in the real world (research or industry) where roll-pitch-yaw, Euler angles, and Axis-Angle representation are used. Why are they used instead of the other methods?
+\end{problem}
+ 
+
+\begin{itemize}
+  \item Roll-pitch-yaw angles are used for navigation in aircraft.  They are used because the axes move with the vehicle which is intuitive to the pilot.
+  \item Euler angles are used when reading the accelerometer off of mobile phones. These devices report Euler angles with respect to the earth's gravitational attraction. This allows for applications to use real world phenomena as input to their games. Euler angles because they intuitively represents the phone's orientation related to a fixed frame.
+  \item Axis-angle representation is used often in linear algebra to better explain a rotation in 3D space. This representation is preferred because it describes (and provides) the angle of rotation around a given vector axis. 
+\end{itemize}
+
+
+\begin{problem}{2}
+Take a matrix below and derive the axis-angle representation variables from this:
+\end{problem}
+ 
+$M = \begin{bmatrix} 0.9851&-0.0881&0.1476\\ 0.1476&0.8735&-0.4640\\ -0.0881&0.4788&0.8735 \end{bmatrix}$  
+\\
+
+Axis angle representation is provided as follows: 
+\begin{equation}
+\theta = \arccos{\frac{Tr(R) - 1}{2}}
+\end{equation}
+
+\begin{equation}
+k = \frac{1}{2*\sin{\theta}}
+\begin{bmatrix} r_{32}-r_{23}\\r_{13}-r_{31}\\ r_{21}-r_{12} \end{bmatrix}
+\end{equation}
+
+\newpage
+Solving for $\theta$ and k gives
+\\
+
+\begin{equation}
+\theta = 0.5235 \rad 
+\end{equation}
+
+\begin{equation}
+k = 
+\begin{bmatrix} 0.2357\\0.0589\\ 0.0589 \end{bmatrix}
+\end{equation}
+\\
+It is important to note that when verifying this axis-angle calculation with MatLab that the rotm2axang function does NOT include the following scalar when computing k:
+
+\begin{equation}
+k_{scalar} = \frac{1}{2*\sin{\theta}}
+\end{equation}
+
+\end{document}
+              
