@@ -81,8 +81,8 @@ d = sym('d', [1 num_links]);
 a = sym('a', [1 num_links]);
 
 % fill in constants for RRP
-d(3) = sym(0);
-a(1:3) = sym(0);
+
+d(1:3) = sym(0);
 alpha(1:3) = sym(0);
 
 for i = 1:num_links
