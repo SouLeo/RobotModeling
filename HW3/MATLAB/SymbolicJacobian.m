@@ -66,8 +66,9 @@
 %     % save columns into 6xn jacobian
 %     jacobian(:,i) = column;
 % end
-% 
-% jacobian
+%
+%jacobian = simplify(jacobian);
+%latex(jacobian)
 
 %% Create Symbolic Representation of RRR A matrices to detemine the Jacobian
 
@@ -134,4 +135,5 @@ for i = 2:num_links
     jacobian(:,i) = column;
 end
 
-jacobian
+jacobian = simplify(jacobian);
+latex(jacobian)
