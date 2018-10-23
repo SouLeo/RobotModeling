@@ -3,10 +3,10 @@
 % always have O_0 be 3 column vector of 0's
 % always have z_0 be 3 column vector of 0's
 
-function jaco = generate_func(base_transforms)
-[num_A_trans, num_dh_params, num_of_A_multiplications] = size(base_transforms);
+function jaco = AnalyticalJacobian(base_transforms, is_revolute_joints)
+[~, ~, num_of_A_multiplications] = size(base_transforms);
 
-num_links = num_of_A_trans;
+num_links = num_of_A_multiplications;
 
 jacobian = zeros(6,num_links);
 
@@ -23,10 +23,10 @@ end
 jacobian(:,1) = column_0;
 
 for i = 2:num_links
-    z_curr = transforms(1:3,3,i-1);
+    z_curr = base_transforms(1:3,3,i-1);
     if is_revolute_joints(i) == 1
         % column vector for revolute joint
-        o_curr = transforms(1:3,4,i-1);
+        o_curr = base_transforms(1:3,4,i-1);
         column = [cross(z_curr,(o_n-o_curr)); z_curr]; 
     else
         % column vector for prismatic joint
