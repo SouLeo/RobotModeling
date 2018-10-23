@@ -1,0 +1,48 @@
+              
+\documentclass[12pt]{article}
+ \usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts, multirow, graphicx, float, hyperref}
+ 
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+ 
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+ 
+\begin{document}
+ 
+\title{Homework 3}
+\author{Selma Wanna}
+\maketitle
+ 
+\begin{problem}{1}
+Derive the Jacobian for your previous RRP manipulator.
+\end{problem}
+ 
+The following derivation was produced using a MatLab script I developed to generate the symbolic representation of arbitrary manipulators' Jacobians. You may find the script on  \href{https://github.com/SouLeo/RobotModeling/blob/master/HW3/MATLAB/SymbolicJacobian.m}{My GitHub (click here)}
+
+\vspace{1cm}
+
+\left(\begin{array}{ccc} -d_{3}\,\sin\left(\theta _{1}\right)\,\sin\left(\theta _{2}\right) & d_{3}\,\cos\left(\theta _{1}\right)\,\cos\left(\theta _{2}\right) & \cos\left(\theta _{1}\right)\,\sin\left(\theta _{2}\right)\\ d_{3}\,\cos\left(\theta _{1}\right)\,\sin\left(\theta _{2}\right) & d_{3}\,\cos\left(\theta _{2}\right)\,\sin\left(\theta _{1}\right) & \sin\left(\theta _{1}\right)\,\sin\left(\theta _{2}\right)\\ 0 & d_{3}\,\sin\left(\theta _{2}\right) & -\cos\left(\theta _{2}\right)\\ 0 & \sin\left(\theta _{1}\right) & 0\\ 0 & -\cos\left(\theta _{1}\right) & 0\\ 1 & 0 & 0 \end{array}\right)
+
+
+\begin{problem}{2}
+Derive the Jacobian for a planar RRR manipulator.
+\end{problem}
+
+\resizebox{\linewidth}{!}{%
+$\displaystyle
+\left(\begin{array}{ccc} -a_{2}\,\sin\left(\theta _{1}+\theta _{2}\right)-a_{1}\,\sin\left(\theta _{1}\right)-a_{3}\,\sin\left(\theta _{1}+\theta _{2}+\theta _{3}\right) & -a_{2}\,\sin\left(\theta _{1}+\theta _{2}\right)-a_{3}\,\sin\left(\theta _{1}+\theta _{2}+\theta _{3}\right) & -a_{3}\,\sin\left(\theta _{1}+\theta _{2}+\theta _{3}\right)\\ a_{2}\,\cos\left(\theta _{1}+\theta _{2}\right)+a_{1}\,\cos\left(\theta _{1}\right)+a_{3}\,\cos\left(\theta _{1}+\theta _{2}+\theta _{3}\right) & a_{2}\,\cos\left(\theta _{1}+\theta _{2}\right)+a_{3}\,\cos\left(\theta _{1}+\theta _{2}+\theta _{3}\right) & a_{3}\,\cos\left(\theta _{1}+\theta _{2}+\theta _{3}\right)\\ 0 & 0 & 0\\ 0 & 0 & 0\\ 0 & 0 & 0\\ 1 & 1 & 1 \end{array}\right)
+$}
+ 
+\pagebreak
+ 
+\begin{problem}{3}
+Animate all three manipulators making a square using whichever path type (quintic, cubic, etc) you like
+\end{problem}
+ 
+ I used a cubic trajectory planner on the RRP and RRR mechanism.
+ 
+\end{document}
+              
