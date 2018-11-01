@@ -27,6 +27,7 @@ classdef ForwardKinematics
         
         % Transform Matrices Relative to Ground Frame
         transform_from_base;
+
         
     end
     
@@ -113,7 +114,7 @@ classdef ForwardKinematics
             vector_transforms = obj.transform_from_base(:,4,:); % extracts last column vector of all base to link transforms
             vector_transforms(end,:,:) = []; % remove last row of matrix
             obj.joint_pose_list = vector_transforms; % updates joint poses by overwriting with new joint positions
-%             obj.history_eef_pose = cat(3, obj.history_eef_pose, vector_transforms(end));
+
         end
         function obj = draw_lines(obj)
             x = obj.joint_pose_list(1,1,:);
@@ -128,15 +129,39 @@ classdef ForwardKinematics
             
             scatter3(x, y, z, 200, 'red', 'filled')
             line(x, y, z, 'color', 'black', 'linewidth', 7)
+          % 7DoF Demo 
+            side_len = 1;
             
-            square_points = [ 2   0   2;
-                              2   2   2;
-                              2   2   0;
-                              2   0   0;
-                              2   0   2;];
+%             sq_p1 = [-1.1 1.2778 0.1364];
+            sq_p1 = [-1 1.2071 0.2071];
+            sq_p2 = sq_p1 + [ 0          0           side_len];
+            sq_p3 = sq_p2 + [ side_len   0           0       ];
+            sq_p4 = sq_p3 + [ 0          0          -side_len];
+            
+            square_points = [  sq_p2;
+                               sq_p3;
+                               sq_p4;];
+            
+            square_points = [square_points; sq_p1; sq_p2];
+%             % RRP Demo
+%             square_end_point = 2;
+%             
+%             square_points = [  square_end_point  0.00               square_end_point;
+%                                square_end_point  square_end_point   square_end_point;
+%                                square_end_point  square_end_point   0.00;
+%                                square_end_point  0.00               0.00; 
+%                                square_end_point  0.00               square_end_point;];
+%             % RRR Demo
+%             square_end_point = 1.00;
+% 
+%             square_points = [  square_end_point+1  square_end_point+1   0.00;
+%                                1.00                square_end_point+1   0.00;
+%                                1.00                1.00                 0.00;
+%                                square_end_point+1  1.00                 0.00;
+%                                square_end_point+1  square_end_point+1   0.00; ];
             line(square_points(:,1),square_points(:,2),square_points(:,3), 'color', 'blue', 'linewidth', 3)
 
-            scale = 5;
+            scale = 2;
             axis([-scale scale -scale scale -scale scale])
             drawnow    
         end

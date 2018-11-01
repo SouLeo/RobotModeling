@@ -1,32 +1,23 @@
-function vel = cubic_path(cart_init, cart_final)
-    t_init = 0;
-    t_final = 4;
+function vel = cubic_path(cart_init, cart_final, delta_t)
+    t_diff = delta_t;
     v_init = [0 0 0];
     v_final = [0 0 0];
-    t = linspace(t_init, t_final, 100*(t_final-t_init));
+    t = linspace(0, t_diff, t_diff);
 
     c = ones(size(t));
 
-    M = [1 t_init    t_init^2     t_init^3;
-         0 1         2*t_init     3*t_init^2;
-         1 t_final   t_final^2    t_final^3;
-         0 1         2*t_final^2  3*t_final^2];
+    M = [1      0          0            0;
+         0      1          0            0;
+         1      t_diff     t_diff^2     t_diff^3;
+         0      1          2*t_diff^2   3*t_diff^2];
     b = [cart_init; v_init; cart_final; v_final];
     a = inv(M)*b;
     
     % qd = reference position trajectory
+    % qd = a(1,:).*c' + a(2,:).*t' + a(3,:).*t'.^2 + a(4,:).*t'.^3;
     % vd = reference velocity trajectory
+    vel = a(2,:).*c'+ 2*a(3,:).*t' + 3*a(4,:).*t'.^2;
     % ad = reference acceleration trajectory
- 
-    %qd = a(1,:).*c' + a(2,:).*t' + a(3,:).*t'.^2 + a(4,:).*t'.^3;
-    
-    vd = a(2,:).*c'+ 2*a(3,:).*t' + 3*a(4,:).*t'.^2;
-    
-    %const_start = cart_init.*c';
-    %vels_at_time_steps = vd(:,2).*t';
-    
-    %integration_check = cumsum(vd(:,2));
     % ad = 2*a(3).*c + 6*a(4).*t;
-    
-    vel = vd;
+
 end
